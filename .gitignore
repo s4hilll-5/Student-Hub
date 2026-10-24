@@ -1,0 +1,23 @@
+# Secrets
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# Backend
+backend/target/
+*.class
+*.log
+hs_err_pid*
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+
+# IDEs and OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db

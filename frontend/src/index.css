@@ -1,0 +1,97 @@
+@import "tailwindcss";
+@import "@fontsource-variable/figtree";
+@import "@fontsource-variable/bricolage-grotesque";
+
+/* Class-based dark mode: ThemeContext toggles .dark on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Design tokens. Semantic colours switch with the theme; components use them through
+  Tailwind utilities such as bg-surface, text-ink, text-muted, border-line.
+*/
+:root {
+  --app-bg: #f5f5fa;
+  --app-surface: #ffffff;
+  --app-subtle: #efeef7;
+  --app-ink: #1c1a33;
+  --app-muted: #625f80;
+  --app-line: #e3e1ee;
+  --app-brand: #4f46e5;
+  --app-brand-strong: #4338ca;
+  --app-brand-soft: #eef0ff;
+  --app-accent: #7c3aed;
+  color-scheme: light;
+}
+
+.dark {
+  --app-bg: #0f0e19;
+  --app-surface: #181726;
+  --app-subtle: #201f33;
+  --app-ink: #ecebf7;
+  --app-muted: #a3a1c2;
+  --app-line: #2b2942;
+  --app-brand: #818cf8;
+  --app-brand-strong: #a5b4fc;
+  --app-brand-soft: #23224a;
+  --app-accent: #a78bfa;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--app-bg);
+  --color-surface: var(--app-surface);
+  --color-subtle: var(--app-subtle);
+  --color-ink: var(--app-ink);
+  --color-muted: var(--app-muted);
+  --color-line: var(--app-line);
+  --color-brand: var(--app-brand);
+  --color-brand-strong: var(--app-brand-strong);
+  --color-brand-soft: var(--app-brand-soft);
+  --color-accent: var(--app-accent);
+}
+
+@theme {
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  h1, h2, h3 {
+    @apply font-display text-ink;
+    letter-spacing: -0.015em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--app-brand);
+    outline-offset: 2px;
+  }
+
+  input, select, textarea, button {
+    font: inherit;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

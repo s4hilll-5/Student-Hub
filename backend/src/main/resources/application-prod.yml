@@ -1,0 +1,17 @@
+# Production overrides. Activate with SPRING_PROFILES_ACTIVE=prod
+spring:
+  jpa:
+    show-sql: false
+
+server:
+  forward-headers-strategy: ${FORWARD_HEADERS_STRATEGY:framework}
+  shutdown: graceful
+
+app:
+  cookie:
+    secure: true
+
+logging:
+  level:
+    root: WARN
+    com.studenthub: INFO

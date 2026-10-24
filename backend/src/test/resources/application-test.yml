@@ -1,0 +1,38 @@
+# Test profile: in-memory H2 in MySQL compatibility mode, so `mvn test` needs no MySQL server.
+# The real schema (Flyway, MySQL) is exercised when the app runs against MySQL with ddl-auto=validate.
+spring:
+  datasource:
+    # One private in-memory database per Spring test context.
+    url: jdbc:h2:mem:studenthub-${random.uuid};MODE=MySQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  flyway:
+    enabled: false
+
+app:
+  frontend-url: http://localhost:5173
+  jwt:
+    # TEST-ONLY secret. Never use this value anywhere else.
+    secret: KP3hvwxOIY2TOkDjd2bPYO6m5rGZhNJihXDfZMLKlpHYikMEF2KtO31Poe7CDxzI+n5Ayv/oMXo3dKqjPTnUPw==
+    # 0s so a replayed refresh token is always treated as theft in tests.
+    refresh-reuse-grace: 0s
+  cookie:
+    secure: false
+  security:
+    bcrypt-strength: 4
+  rate-limit:
+    enabled: false
+  mail:
+    enabled: false
+  admin:
+    email: ""
+    password: ""
+
+logging:
+  level:
+    root: WARN
+    com.studenthub: INFO

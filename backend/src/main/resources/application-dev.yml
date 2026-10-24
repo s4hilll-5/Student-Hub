@@ -1,0 +1,15 @@
+# Local development overrides. Activate with SPRING_PROFILES_ACTIVE=dev
+spring:
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+app:
+  cookie:
+    secure: ${COOKIE_SECURE:false}
+
+logging:
+  level:
+    com.studenthub: DEBUG
